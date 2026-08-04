@@ -8,6 +8,7 @@ import { useCart } from "../context/CartContext";
 export default function Navbar() {
 
   const [cartOpen, setCartOpen] = useState(false);
+const [menuOpen, setMenuOpen] = useState(false);
   const { cart } = useCart();
 
 const cartCount = cart.reduce(
@@ -30,7 +31,17 @@ const cartCount = cart.reduce(
     border-white/10
     ">
 
-
+<button
+  onClick={() => setMenuOpen(!menuOpen)}
+  className="
+  md:hidden
+  text-[#D4AF37]
+  text-3xl
+  "
+>
+  ☰
+</button>
+     
       <div className="
       max-w-7xl
       mx-auto
@@ -166,6 +177,32 @@ const cartCount = cart.reduce(
 
 
     </nav>
+    {menuOpen && (
+  <div className="
+  md:hidden
+  bg-black
+  border-b
+  border-white/10
+  p-6
+  flex
+  flex-col
+  gap-5
+  text-center
+  uppercase
+  ">
+
+    <a href="/">Home</a>
+
+    <a href="/shop">Shop</a>
+
+    <a href="/order-status">Track Order</a>
+
+    <a href="/about">About</a>
+
+    <a href="/contact">Contact</a>
+
+  </div>
+)}
 
 
 
