@@ -19,7 +19,9 @@ export default function ProductCard({
   description,
 }: ProductCardProps) {
 
-  const { addToCart } = useCart();
+  const { cart, addToCart, increase, decrease } = useCart();
+  const quantity =
+  cart.find((item) => item.id === id)?.quantity || 0;
 
   return (
     <div
@@ -97,30 +99,61 @@ export default function ProductCard({
 
 
 
-        <button
+        {quantity === 0 ? (
+  <button
+    onClick={() =>
+      addToCart({
+        id,
+        name,
+        image,
+        price,
+        quantity: 1,
+      })
+    }
+    className="
+    bg-[#D4AF37]
+    text-black
+    px-6 py-3
+    rounded-full
+    font-bold
+    hover:scale-105
+    transition
+    "
+  >
+    Add to Cart
+  </button>
+) : (
+  <div
+    className="
+    bg-[#D4AF37]
+    text-black
+    px-5 py-3
+    rounded-full
+    font-bold
+    flex
+    items-center
+    gap-5
+    "
+  >
+    <button
+      onClick={() => decrease(id)}
+      className="text-xl"
+    >
+      −
+    </button>
 
-          onClick={() =>
-            addToCart({
-              id,
-              name,
-              image,
-              price,
-              quantity: 1,
-            })
-          }
+    <span>
+      {quantity}
+    </span>
 
-          className="
-          bg-[#D4AF37]
-          text-black
-          px-6 py-3
-          rounded-full
-          font-bold
-          hover:scale-105
-          transition
-          "
-        >
-          Add to Cart
-        </button>
+    <button
+      onClick={() => increase(id)}
+      className="text-xl"
+    >
+      +
+    </button>
+  </div>
+)}
 
 
       </div>
