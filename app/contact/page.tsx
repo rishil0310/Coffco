@@ -41,7 +41,7 @@ export default function Contact() {
             </h2>
 
             <p className="text-gray-300 mt-4 text-lg">
-              rishil0310@gmail.com
+              coffco71@gmail.com
             </p>
 
           </div>

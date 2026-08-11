@@ -84,7 +84,7 @@ export default function Hero() {
 
           <motion.img
 
-            src="/products/original.png"
+            src="/products/original-new.png"
 
             alt="Coffco Original Cold Coffee"
 
