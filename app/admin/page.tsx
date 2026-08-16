@@ -87,12 +87,16 @@ function formatDate(value: string | null): string {
   if (!value) return "Just now";
 
   const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? "Just now"
-    : new Intl.DateTimeFormat("en-IN", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(date);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Just now";
+  }
+
+  return new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Kolkata",
+  }).format(date);
 }
 
 function statusClass(status: string): string {
