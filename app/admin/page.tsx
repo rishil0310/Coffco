@@ -86,7 +86,7 @@ delivery_time_slot:
 function formatDate(value: string | null): string {
   if (!value) return "Just now";
 
-  const date = new Date(value);
+  const date = new Date(`${value}Z`);
 
   if (Number.isNaN(date.getTime())) {
     return "Just now";
