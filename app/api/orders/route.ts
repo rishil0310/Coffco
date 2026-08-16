@@ -8,13 +8,15 @@ export async function POST(req: Request) {
     const { error } = await supabaseAdmin
       .from("orders")
       .insert({
-        order_id: order.id,
-        customer: order.customer,
-        items: order.items,
-        total: order.total,
-        payment: order.payment,
-        status: "Pending",
-      });
+  order_id: order.id,
+  customer: order.customer,
+  items: order.items,
+  total: order.total,
+  payment: order.payment,
+  status: "Pending",
+  delivery_date: order.delivery.date,
+  delivery_time_slot: order.delivery.timeSlot,
+});
 
     if (error) {
       console.log("Supabase error:", error);

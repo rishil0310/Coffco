@@ -32,6 +32,9 @@ export default function Hero() {
             flavours and a smooth experience, crafted for
             coffee lovers on the go.
           </p>
+          <p className="text-sm text-[#D4AF37] mt-4">
+  Delivered next day inside your classroom!
+</p>
 
 
           <div className="flex gap-5 mt-10">

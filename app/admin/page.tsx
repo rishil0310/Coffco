@@ -31,6 +31,8 @@ type AdminOrder = {
   payment_status: string;
   status: OrderStatus;
   created_at: string | null;
+delivery_date: string;
+delivery_time_slot: string;
 };
 
 const ORDER_STATUSES: OrderStatus[] = ["Pending", "Preparing", "Ready", "Delivered"];
@@ -72,7 +74,12 @@ function normalizeOrder(value: unknown): AdminOrder {
     payment: typeof order.payment === "string" ? order.payment : "cod",
     payment_status: typeof order.payment_status === "string" ? order.payment_status : "Pending",
     status,
-    created_at: typeof order.created_at === "string" ? order.created_at : null,
+created_at: typeof order.created_at === "string" ? order.created_at : null,
+delivery_date: typeof order.delivery_date === "string" ? order.delivery_date : "next-day",
+delivery_time_slot:
+  typeof order.delivery_time_slot === "string"
+    ? order.delivery_time_slot
+    : "—",
   };
 }
 
@@ -263,6 +270,16 @@ export default function AdminPage() {
                       <p><span className="text-gray-500">Phone:</span> {order.customer.phone}</p>
                       <p><span className="text-gray-500">Location:</span> {order.customer.classroom}{order.customer.division ? ` · ${order.customer.division}` : ""}</p>
                       <p><span className="text-gray-500">Payment:</span> {order.payment === "razorpay" ? "Razorpay" : "Cash on Delivery"}</p>
+                      <p>
+  <span className="text-gray-500">Delivery:</span> Next Day
+</p>
+
+<p>
+  <span className="text-gray-500">Time:</span>{" "}
+  <span className="font-bold text-[#D4AF37]">
+    {order.delivery_time_slot}
+  </span>
+</p>
                     </div>
                     <div>
                       <h3 className="mb-2 font-bold">Items</h3>

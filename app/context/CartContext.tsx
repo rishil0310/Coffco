@@ -21,8 +21,12 @@ export type Order = {
   };
   items: CartItem[];
   total: number;
-  payment: "cod" | "razorpay";
+payment: "cod" | "razorpay";
 payment_status?: "Pending" | "Paid";
+delivery: {
+  date: "next-day";
+  timeSlot: string;
+};
 };
 
 type CartContextType = {

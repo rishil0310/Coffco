@@ -88,6 +88,7 @@ export default function Checkout() {
   const [division, setDivision] = useState("");
   const [year, setYear] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [timeSlot, setTimeSlot] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -98,8 +99,15 @@ export default function Checkout() {
       return false;
     }
 
-    if (!name.trim() || !phone.trim() || !email.trim() || !classroom.trim() || !division.trim()) {
-      setErrorMessage("Please complete all delivery details before continuing.");
+   if (
+  !name.trim() ||
+  !phone.trim() ||
+  !email.trim() ||
+  !classroom.trim() ||
+  !division.trim() ||
+  !timeSlot
+) {
+     setErrorMessage("Please complete all delivery details and select a time slot.");
       return false;
     }
 
@@ -125,6 +133,10 @@ export default function Checkout() {
       items: cart,
       total,
       payment: paymentMethod,
+      delivery: {
+  date: "next-day",
+  timeSlot,
+},
     };
   }
 
@@ -255,6 +267,32 @@ export default function Checkout() {
             <input placeholder="Division" value={division} onChange={(event) => setDivision(event.target.value)} className="mb-4 w-full rounded-xl border border-white/20 bg-black p-4" />
             <input placeholder="Year" value={year} onChange={(event) => setYear(event.target.value)} className="w-full rounded-xl border border-white/20 bg-black p-4" />
 
+<div className="mt-6">
+  <h3 className="mb-3 text-lg font-bold">Delivery</h3>
+
+  <p className="text-gray-400 mb-4">
+    Next Day Delivery
+  </p>
+
+  <label className="mb-2 block text-sm text-gray-300">
+    Select Time Slot
+  </label>
+
+  <select
+    value={timeSlot}
+    onChange={(event) => setTimeSlot(event.target.value)}
+    className="w-full rounded-xl border border-white/20 bg-black p-4 text-white"
+  >
+    <option value="">Select a time slot</option>
+    <option value="12:00 PM">12:00 PM</option>
+    <option value="1:00 PM">1:00 PM</option>
+    <option value="2:00 PM">2:00 PM</option>
+    <option value="3:00 PM">3:00 PM</option>
+    <option value="4:00 PM">4:00 PM</option>
+    <option value="5:00 PM">5:00 PM</option>
+    <option value="6:00 PM">6:00 PM</option>
+  </select>
+</div>
             <p className="mt-6 text-gray-400">📍 NMIMS Mumbai Campus</p>
           </div>
 
